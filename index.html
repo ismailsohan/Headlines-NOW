@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Headlines NOW</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'SolaimanLipi', Arial, sans-serif;
+    background: #fff;
+    color: #000;
+  }
+
+  /* Top Bar */
+  .topbar {
+    background: #222;
+    color: #fff;
+    padding: 5px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+  }
+  #clock {
+    font-weight: bold;
+  }
+
+  /* Headlines NOW banner */
+  .headline-banner {
+    background: #d71920;
+    color: white;
+    font-weight: bold;
+    font-size: 36px;
+    text-align: center;
+    padding: 20px 0;
+    user-select: none;
+  }
+
+  /* Navigation Bar */
+  .nav-bar {
+    background: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+    font-weight: bold;
+  }
+  .nav-bar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 25px;
+  }
+  .nav-bar ul li {
+    position: relative;
+  }
+  .nav-bar ul li a {
+    text-decoration: none;
+    color: #222;
+    padding: 5px 8px;
+    cursor: pointer;
+  }
+  .nav-bar ul li:hover > a {
+    color: #d71920;
+  }
+
+  /* Dropdown Menu */
+  .nav-bar ul li .dropdown {
+    display: none;
+    position: absolute;
+    background: white;
+    top: 30px;
+    left: 0;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    min-width: 220px;
+    z-index: 1000;
+  }
+  .nav-bar ul li:hover .dropdown {
+    display: block;
+  }
+  .dropdown a {
+    display: block;
+    padding: 8px 15px;
+    color: #333;
+    font-weight: normal;
+  }
+  .dropdown a:hover {
+    background: #d71920;
+    color: white;
+  }
+
+  /* Breaking News Ticker */
+  .breaking-news {
+    background: #d71920;
+    color: white;
+    padding: 8px 20px;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  .breaking-news marquee {
+    font-size: 16px;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .nav-bar ul {
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+    }
+    .headline-banner {
+      font-size: 28px;
+      padding: 15px 0;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- Top Bar -->
+<div class="topbar">
+  <div id="clock">Loading time...</div>
+  <div id="date"></div>
+</div>
+
+<!-- Headlines NOW Banner -->
+<div class="headline-banner">Headlines NOW</div>
+
+<!-- Navigation Bar -->
+<nav class="nav-bar">
+  <ul>
+    <li><a href="#">বাংলাদেশ</a></li>
+    <li><a href="#">রাজনীতি</a></li>
+    <li><a href="#">খেলাধুলা</a></li>
+    <li><a href="#">আন্তর্জাতিক</a></li>
+    <li><a href="#">মিডিয়া</a></li>
+    <li>
+      <a href="#">লাইভ ▼</a>
+      <div class="dropdown">
+        <a href="https://www.dsebd.org/" target="_blank" rel="noopener noreferrer">শেয়ার মার্কেট লাইভ প্রাইস</a>
+        <a href="https://coinmarketcap.com/" target="_blank" rel="noopener noreferrer">ক্রিপ্টোকারেন্সি লাইভ প্রাইস</a>
+        <a href="https://www.flightradar24.com/" target="_blank" rel="noopener noreferrer">লাইভ এয়ারপ্লেন ট্র্যাকিং</a>
+        <a href="https://www.windy.com/-Waves-waves?waves,21.997,79.001,5" target="_blank" rel="noopener noreferrer">লাইভ ওয়েদার</a>
+      </div>
+    </li>
+    <li><a href="#">অর্থনীতি</a></li>
+    <li><a href="#">স্বাস্থ্য</a></li>
+  </ul>
+</nav>
+
+<!-- Breaking News Ticker -->
+<div class="breaking-news">
+  <marquee behavior="scroll" direction="left" scrollamount="6" onmouseover="this.stop();" onmouseout="this.start();">
+    Headlines NOW অল্প কিছু দিনের মধ্যেই লাইভ হবে। অনুগ্রহ করে অপেক্ষা করুন। আপডেট নিউজ ও লাইভ ট্র্যাকিং পেতে আমাদের সাথেই থাকুন। ধানের শীষে ভোট দিন।
+  </marquee>
+</div>
+
+<script>
+  // Live clock and date update
+  function updateClock() {
+    const now = new Date();
+    const optionsTime = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
+    const timeString = now.toLocaleTimeString('bn-BD', optionsTime);
+    document.getElementById('clock').textContent = timeString;
+    
+    const optionsDate = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' };
+    const dateString = now.toLocaleDateString('bn-BD', optionsDate);
+    document.getElementById('date').textContent = dateString;
+  }
+  setInterval(updateClock, 1000);
+  updateClock();
+</script>
+
+</body>
+</html>
