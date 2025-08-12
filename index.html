@@ -18,27 +18,33 @@
     color: #fff;
     padding: 5px 20px;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     font-size: 14px;
     position: relative;
+    gap: 15px;
+    flex-wrap: wrap;
   }
   #clock {
     font-weight: bold;
+  }
+  #date {
+    font-size: 13px;
   }
 
   /* Language Switcher */
   #lang-switcher {
     position: absolute;
     right: 20px;
-    top: 30px; /* date এর নিচে */
+    top: 8px;
     font-weight: bold;
     cursor: pointer;
     user-select: none;
+    color: white;
   }
   #lang-switcher span {
     margin-left: 10px;
-    color: white;
+    user-select: none;
   }
   #lang-switcher span.selected {
     text-decoration: underline;
@@ -140,6 +146,12 @@
       position: static;
       margin-top: 5px;
       text-align: center;
+      right: auto;
+      top: auto;
+      color: white;
+    }
+    .topbar {
+      justify-content: center;
     }
   }
 </style>
@@ -147,11 +159,9 @@
 <body>
 
 <!-- Top Bar -->
-<div class="topbar">
-  <div>
-    <div id="clock">Loading time...</div>
-    <div id="date"></div>
-  </div>
+<div class="topbar" style="position: relative;">
+  <div id="clock">Loading time...</div>
+  <div id="date"></div>
   <!-- Language Switcher -->
   <div id="lang-switcher">
     <span id="bn-btn" class="selected">বাংলা</span> / <span id="en-btn">ENGLISH</span>
