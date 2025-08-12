@@ -24,6 +24,10 @@
     font-size: 24px;
     font-weight: bold;
   }
+  .datetime {
+    font-size: 14px;
+    margin-top: 5px;
+  }
   .right-section {
     text-align: right;
   }
@@ -56,19 +60,15 @@
     text-decoration: none;
     font-weight: bold;
   }
-  .content {
-    padding: 20px;
-    background: white;
-    max-width: 900px;
-    margin: 20px auto;
-    border-radius: 8px;
-  }
 </style>
 </head>
 <body>
 
 <header>
-  <div class="logo" id="headline">Headlines NOW</div>
+  <div>
+    <div class="logo" id="headline">Headlines NOW</div>
+    <div class="datetime" id="datetime"></div>
+  </div>
   <div class="right-section">
     <div class="lang-switch" id="langSwitch">বাংলা / ENGLISH</div>
     <div class="auth-links">
@@ -95,14 +95,6 @@
   </ul>
 </nav>
 
-<div class="content">
-  <h2 id="newsTitle">বাংলাদেশ-মালয়েশিয়া স্বাক্ষর করল ৫টি সমঝোতা স্মারক, ৩টি নোট বিনিময়</h2>
-  <p id="newsContent">
-    মালয়েশিয়ার প্রশাসনিক রাজধানী পুত্রাজয়ায় ১২ আগস্ট ২০২৫ অনুষ্ঠিত এক উর্ধ্বতন বৈঠকে বাংলাদেশ ও মালয়েশিয়া পাঁচটি সমঝোতা স্মারক (MoU) স্বাক্ষর এবং তিনটি নোট বিনিময় করেছে। উক্ত অনুষ্ঠানে উপস্থিত ছিলেন বাংলাদেশের চিফ অ্যাডভাইজার অধ্যাপক মুহাম্মদ ইউনুস এবং মালয়েশিয়ার প্রধানমন্ত্রী আনোয়ার ইব্রাহিম। 
-    বাংলাদেশ ও মালয়েশিয়ার মধ্যে উচ্চশিক্ষা, কূটনৈতিক প্রশিক্ষণ, প্রতিরক্ষা, LNG, হালাল ইকোসিস্টেম, কৌশলগত গবেষণা এবং বাণিজ্যিক সম্পর্ক বৃদ্ধির মতো বিভিন্ন ক্ষেত্রে সহযোগিতা জোরদারের লক্ষ্যে এই চুক্তিসমূহ স্বাক্ষরিত হয়।
-  </p>
-</div>
-
 <script>
 const translations = {
   bn: {
@@ -112,10 +104,7 @@ const translations = {
       "ফিচার ও বিশ্লেষণ", "ভ্রমণ ব্লগ", "লাইভ আপডেট", "সেবা"
     ],
     signup: "সাইন আপ",
-    login: "লগইন",
-    newsTitle: "বাংলাদেশ-মালয়েশিয়া স্বাক্ষর করল ৫টি সমঝোতা স্মারক, ৩টি নোট বিনিময়",
-    newsContent: `মালয়েশিয়ার প্রশাসনিক রাজধানী পুত্রাজয়ায় ১২ আগস্ট ২০২৫ অনুষ্ঠিত এক উর্ধ্বতন বৈঠকে বাংলাদেশ ও মালয়েশিয়া পাঁচটি সমঝোতা স্মারক (MoU) স্বাক্ষর এবং তিনটি নোট বিনিময় করেছে। উক্ত অনুষ্ঠানে উপস্থিত ছিলেন বাংলাদেশের চিফ অ্যাডভাইজার অধ্যাপক মুহাম্মদ ইউনুস এবং মালয়েশিয়ার প্রধানমন্ত্রী আনোয়ার ইব্রাহিম। 
-    বাংলাদেশ ও মালয়েশিয়ার মধ্যে উচ্চশিক্ষা, কূটনৈতিক প্রশিক্ষণ, প্রতিরক্ষা, LNG, হালাল ইকোসিস্টেম, কৌশলগত গবেষণা এবং বাণিজ্যিক সম্পর্ক বৃদ্ধির মতো বিভিন্ন ক্ষেত্রে সহযোগিতা জোরদারের লক্ষ্যে এই চুক্তিসমূহ স্বাক্ষরিত হয়।`
+    login: "লগইন"
   },
   en: {
     categories: [
@@ -124,9 +113,7 @@ const translations = {
       "Features & Analysis", "Travel Blog", "Live Updates", "Services"
     ],
     signup: "Sign Up",
-    login: "Login",
-    newsTitle: "Bangladesh and Malaysia Sign 5 MoUs, Exchange 3 Notes",
-    newsContent: `On August 12, 2025, in Putrajaya, Malaysia, Bangladesh and Malaysia signed five MoUs and exchanged three notes to strengthen cooperation in various fields including higher education, diplomatic training, defense, LNG, halal ecosystem, strategic research, and trade relations. The event was attended by Bangladesh's Chief Adviser Prof. Muhammad Yunus and Malaysian Prime Minister Anwar Ibrahim.`
+    login: "Login"
   }
 };
 
@@ -149,11 +136,25 @@ function updateLanguage() {
   // Update auth links
   document.getElementById("signupLink").textContent = langData.signup;
   document.getElementById("loginLink").textContent = langData.login;
-
-  // Update news content
-  document.getElementById("newsTitle").textContent = langData.newsTitle;
-  document.getElementById("newsContent").textContent = langData.newsContent;
 }
+
+// Show live date & time
+function updateDateTime() {
+  const now = new Date();
+  const optionsBn = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  const optionsEn = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  
+  let dateStr = currentLang === "bn" 
+    ? now.toLocaleDateString('bn-BD', optionsBn) 
+    : now.toLocaleDateString('en-US', optionsEn);
+  
+  let timeStr = now.toLocaleTimeString(currentLang === "bn" ? 'bn-BD' : 'en-US');
+  
+  document.getElementById("datetime").textContent = `${timeStr} | ${dateStr}`;
+}
+
+setInterval(updateDateTime, 1000);
+updateDateTime();
 </script>
 
 </body>
