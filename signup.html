@@ -1,0 +1,69 @@
+<!-- signup.html -->
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>সাইন আপ</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  .signup-container {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+  }
+  h2 {
+    text-align: center;
+    color: #d32f2f;
+  }
+  input {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  button {
+    width: 100%;
+    padding: 10px;
+    background: #d32f2f;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  button:hover {
+    background: #b71c1c;
+  }
+  .back-link {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+  }
+</style>
+</head>
+<body>
+
+<div class="signup-container">
+  <h2>সাইন আপ</h2>
+  <form action="#" method="post">
+    <input type="text" placeholder="ইউজারনেম" required>
+    <input type="email" placeholder="ইমেইল" required>
+    <input type="password" placeholder="পাসওয়ার্ড" required>
+    <input type="password" placeholder="পাসওয়ার্ড নিশ্চিত করুন" required>
+    <button type="submit">সাইন আপ</button>
+  </form>
+  <a href="index.html" class="back-link">⬅ হোম পেজে ফেরত যান</a>
+</div>
+
+</body>
+</html>
