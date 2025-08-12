@@ -21,9 +21,30 @@
     justify-content: space-between;
     align-items: center;
     font-size: 14px;
+    position: relative;
   }
   #clock {
     font-weight: bold;
+  }
+
+  /* Language Switcher */
+  #lang-switcher {
+    position: absolute;
+    right: 20px;
+    top: 30px; /* date এর নিচে */
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+  }
+  #lang-switcher span {
+    margin-left: 10px;
+    color: white;
+  }
+  #lang-switcher span.selected {
+    text-decoration: underline;
+  }
+  #lang-switcher span:hover {
+    text-decoration: underline;
   }
 
   /* Headlines NOW banner */
@@ -115,6 +136,11 @@
       font-size: 28px;
       padding: 15px 0;
     }
+    #lang-switcher {
+      position: static;
+      margin-top: 5px;
+      text-align: center;
+    }
   }
 </style>
 </head>
@@ -122,8 +148,14 @@
 
 <!-- Top Bar -->
 <div class="topbar">
-  <div id="clock">Loading time...</div>
-  <div id="date"></div>
+  <div>
+    <div id="clock">Loading time...</div>
+    <div id="date"></div>
+  </div>
+  <!-- Language Switcher -->
+  <div id="lang-switcher">
+    <span id="bn-btn" class="selected">বাংলা</span> / <span id="en-btn">ENGLISH</span>
+  </div>
 </div>
 
 <!-- Headlines NOW Banner -->
@@ -132,48 +164,121 @@
 <!-- Navigation Bar -->
 <nav class="nav-bar">
   <ul>
-    <li><a href="#">বাংলাদেশ</a></li>
-    <li><a href="#">রাজনীতি</a></li>
-    <li><a href="#">খেলাধুলা</a></li>
-    <li><a href="#">আন্তর্জাতিক</a></li>
-    <li><a href="#">মিডিয়া</a></li>
+    <li><a href="#" data-key="bangladesh">বাংলাদেশ</a></li>
+    <li><a href="#" data-key="politics">রাজনীতি</a></li>
+    <li><a href="#" data-key="sports">খেলাধুলা</a></li>
+    <li><a href="#" data-key="international">আন্তর্জাতিক</a></li>
+    <li><a href="#" data-key="media">মিডিয়া</a></li>
     <li>
-      <a href="#">লাইভ ▼</a>
+      <a href="#" data-key="live">লাইভ ▼</a>
       <div class="dropdown">
-        <a href="https://www.dsebd.org/" target="_blank" rel="noopener noreferrer">শেয়ার মার্কেট লাইভ প্রাইস</a>
-        <a href="https://coinmarketcap.com/" target="_blank" rel="noopener noreferrer">ক্রিপ্টোকারেন্সি লাইভ প্রাইস</a>
-        <a href="https://www.flightradar24.com/" target="_blank" rel="noopener noreferrer">লাইভ এয়ারপ্লেন ট্র্যাকিং</a>
-        <a href="https://www.windy.com/-Waves-waves?waves,21.997,79.001,5" target="_blank" rel="noopener noreferrer">লাইভ ওয়েদার</a>
+        <a href="https://www.dsebd.org/" target="_blank" rel="noopener noreferrer" data-key="sharemarket">শেয়ার মার্কেট লাইভ প্রাইস</a>
+        <a href="https://coinmarketcap.com/" target="_blank" rel="noopener noreferrer" data-key="crypto">ক্রিপ্টোকারেন্সি লাইভ প্রাইস</a>
+        <a href="https://www.flightradar24.com/" target="_blank" rel="noopener noreferrer" data-key="airplane">লাইভ এয়ারপ্লেন ট্র্যাকিং</a>
+        <a href="https://www.windy.com/-Waves-waves?waves,21.997,79.001,5" target="_blank" rel="noopener noreferrer" data-key="weather">লাইভ ওয়েদার</a>
       </div>
     </li>
-    <li><a href="#">অর্থনীতি</a></li>
-    <li><a href="#">স্বাস্থ্য</a></li>
+    <li><a href="#" data-key="economy">অর্থনীতি</a></li>
+    <li><a href="#" data-key="health">স্বাস্থ্য</a></li>
   </ul>
 </nav>
 
 <!-- Breaking News Ticker -->
 <div class="breaking-news">
-  <marquee behavior="scroll" direction="left" scrollamount="6" onmouseover="this.stop();" onmouseout="this.start();">
+  <marquee behavior="scroll" direction="left" scrollamount="6" onmouseover="this.stop();" onmouseout="this.start();" data-key="breakingnews">
     Headlines NOW অল্প কিছু দিনের মধ্যেই লাইভ হবে। অনুগ্রহ করে অপেক্ষা করুন। আপডেট নিউজ ও লাইভ ট্র্যাকিং পেতে আমাদের সাথেই থাকুন। ইসমাইল হোসেন সোহান 
   </marquee>
 </div>
 
 <script>
-  // Live clock and date update
-  function updateClock() {
+  // Language data
+  const translations = {
+    bn: {
+      bangladesh: "বাংলাদেশ",
+      politics: "রাজনীতি",
+      sports: "খেলাধুলা",
+      international: "আন্তর্জাতিক",
+      media: "মিডিয়া",
+      live: "লাইভ ▼",
+      sharemarket: "শেয়ার মার্কেট লাইভ প্রাইস",
+      crypto: "ক্রিপ্টোকারেন্সি লাইভ প্রাইস",
+      airplane: "লাইভ এয়ারপ্লেন ট্র্যাকিং",
+      weather: "লাইভ ওয়েদার",
+      economy: "অর্থনীতি",
+      health: "স্বাস্থ্য",
+      breakingnews: "Headlines NOW অল্প কিছু দিনের মধ্যেই লাইভ হবে। অনুগ্রহ করে অপেক্ষা করুন। আপডেট নিউজ ও লাইভ ট্র্যাকিং পেতে আমাদের সাথেই থাকুন। ইসমাইল হোসেন সোহান "
+    },
+    en: {
+      bangladesh: "Bangladesh",
+      politics: "Politics",
+      sports: "Sports",
+      international: "International",
+      media: "Media",
+      live: "Live ▼",
+      sharemarket: "Share Market Live Price",
+      crypto: "Cryptocurrency Live Price",
+      airplane: "Live Airplane Tracking",
+      weather: "Live Weather",
+      economy: "Economy",
+      health: "Health",
+      breakingnews: "Headlines NOW will be live in a few days. Please stay tuned for updates and live tracking. Ismail Hossain Sohan"
+    }
+  };
+
+  // Update texts according to selected language
+  function setLanguage(lang) {
+    // Update all elements with data-key attributes
+    document.querySelectorAll('[data-key]').forEach(el => {
+      const key = el.getAttribute('data-key');
+      if(translations[lang][key]) {
+        el.textContent = translations[lang][key];
+      }
+    });
+
+    // Update clock and date locale
+    updateClock(lang);
+
+    // Update language switcher UI
+    if(lang === 'bn') {
+      document.getElementById('bn-btn').classList.add('selected');
+      document.getElementById('en-btn').classList.remove('selected');
+    } else {
+      document.getElementById('en-btn').classList.add('selected');
+      document.getElementById('bn-btn').classList.remove('selected');
+    }
+  }
+
+  // Live clock and date update with locale
+  function updateClock(lang='bn') {
     const now = new Date();
     const optionsTime = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
-    const timeString = now.toLocaleTimeString('bn-BD', optionsTime);
-    document.getElementById('clock').textContent = timeString;
-    
     const optionsDate = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' };
-    const dateString = now.toLocaleDateString('bn-BD', optionsDate);
+
+    // For Bengali use bn-BD locale, for English use en-US
+    const locale = lang === 'bn' ? 'bn-BD' : 'en-US';
+
+    const timeString = now.toLocaleTimeString(locale, optionsTime);
+    document.getElementById('clock').textContent = timeString;
+
+    const dateString = now.toLocaleDateString(locale, optionsDate);
     document.getElementById('date').textContent = dateString;
   }
-  setInterval(updateClock, 1000);
-  updateClock();
+
+  // Event listeners for language buttons
+  document.getElementById('bn-btn').addEventListener('click', () => setLanguage('bn'));
+  document.getElementById('en-btn').addEventListener('click', () => setLanguage('en'));
+
+  // Initialize with Bengali as default
+  setLanguage('bn');
+
+  // Also update time every second
+  setInterval(() => {
+    // check selected language
+    const lang = document.getElementById('bn-btn').classList.contains('selected') ? 'bn' : 'en';
+    updateClock(lang);
+  }, 1000);
+
 </script>
 
 </body>
 </html>
-
