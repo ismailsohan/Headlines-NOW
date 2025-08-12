@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Headlines NOW</title>
+<title>Headlines NOW - Demo</title>
 <style>
   body {
     margin: 0;
@@ -11,7 +11,6 @@
     background: #fff;
     color: #000;
   }
-
   /* Top Bar */
   .topbar {
     background: #222;
@@ -31,7 +30,6 @@
   #date {
     font-size: 13px;
   }
-
   /* Language Switcher */
   #lang-switcher {
     position: absolute;
@@ -52,7 +50,6 @@
   #lang-switcher span:hover {
     text-decoration: underline;
   }
-
   /* Headlines NOW banner */
   .headline-banner {
     background: #d71920;
@@ -62,97 +59,44 @@
     text-align: center;
     padding: 20px 0;
     user-select: none;
+    margin-bottom: 30px;
   }
-
-  /* Navigation Bar */
-  .nav-bar {
-    background: #f4f4f4;
-    display: flex;
-    justify-content: center;
-    padding: 10px 0;
-    border-bottom: 1px solid #ddd;
+  /* Category buttons */
+  #category-buttons {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  #category-buttons button {
+    margin: 0 10px;
+    padding: 10px 20px;
     font-weight: bold;
-  }
-  .nav-bar ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    gap: 25px;
-  }
-  .nav-bar ul li {
-    position: relative;
-  }
-  .nav-bar ul li a {
-    text-decoration: none;
-    color: #222;
-    padding: 5px 8px;
     cursor: pointer;
-  }
-  .nav-bar ul li:hover > a {
-    color: #d71920;
-  }
-
-  /* Dropdown Menu */
-  .nav-bar ul li .dropdown {
-    display: none;
-    position: absolute;
+    border: 1px solid #d71920;
     background: white;
-    top: 30px;
-    left: 0;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-    min-width: 220px;
-    z-index: 1000;
+    color: #d71920;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
   }
-  .nav-bar ul li:hover .dropdown {
-    display: block;
-  }
-  .dropdown a {
-    display: block;
-    padding: 8px 15px;
-    color: #333;
-    font-weight: normal;
-  }
-  .dropdown a:hover {
-    background: #d71920;
+  #category-buttons button.selected,
+  #category-buttons button:hover {
+    background-color: #d71920;
     color: white;
   }
-
-  /* Breaking News Ticker */
-  .breaking-news {
-    background: #d71920;
-    color: white;
-    padding: 8px 20px;
+  /* News sections */
+  .news-section {
+    max-width: 900px;
+    margin: 0 auto 40px auto;
+    padding: 0 15px;
+  }
+  .news-title {
     font-weight: bold;
-    white-space: nowrap;
-    overflow: hidden;
+    font-size: 24px;
+    margin-bottom: 15px;
   }
-  .breaking-news marquee {
+  .news-content {
     font-size: 16px;
-  }
-
-  /* Responsive */
-  @media (max-width: 768px) {
-    .nav-bar ul {
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 15px;
-    }
-    .headline-banner {
-      font-size: 28px;
-      padding: 15px 0;
-    }
-    #lang-switcher {
-      position: static;
-      margin-top: 5px;
-      text-align: center;
-      right: auto;
-      top: auto;
-      color: white;
-    }
-    .topbar {
-      justify-content: center;
-    }
+    line-height: 1.6;
+    white-space: pre-line; /* preserve line breaks */
   }
 </style>
 </head>
@@ -171,125 +115,165 @@
 <!-- Headlines NOW Banner -->
 <div class="headline-banner">Headlines NOW</div>
 
-<!-- Navigation Bar -->
-<nav class="nav-bar">
-  <ul>
-    <li><a href="#" data-key="bangladesh">বাংলাদেশ</a></li>
-    <li><a href="#" data-key="politics">রাজনীতি</a></li>
-    <li><a href="#" data-key="sports">খেলাধুলা</a></li>
-    <li><a href="#" data-key="international">আন্তর্জাতিক</a></li>
-    <li><a href="#" data-key="media">মিডিয়া</a></li>
-    <li>
-      <a href="#" data-key="live">লাইভ ▼</a>
-      <div class="dropdown">
-        <a href="https://www.dsebd.org/" target="_blank" rel="noopener noreferrer" data-key="sharemarket">শেয়ার মার্কেট লাইভ প্রাইস</a>
-        <a href="https://coinmarketcap.com/" target="_blank" rel="noopener noreferrer" data-key="crypto">ক্রিপ্টোকারেন্সি লাইভ প্রাইস</a>
-        <a href="https://www.flightradar24.com/" target="_blank" rel="noopener noreferrer" data-key="airplane">লাইভ এয়ারপ্লেন ট্র্যাকিং</a>
-        <a href="https://www.windy.com/-Waves-waves?waves,21.997,79.001,5" target="_blank" rel="noopener noreferrer" data-key="weather">লাইভ ওয়েদার</a>
-      </div>
-    </li>
-    <li><a href="#" data-key="economy">অর্থনীতি</a></li>
-    <li><a href="#" data-key="health">স্বাস্থ্য</a></li>
-  </ul>
-</nav>
+<!-- Category buttons -->
+<div id="category-buttons">
+  <button data-cat="home" class="selected">হোমপেজ</button>
+  <button data-cat="bangladesh">বাংলাদেশ</button>
+</div>
 
-<!-- Breaking News Ticker -->
-<div class="breaking-news">
-  <marquee behavior="scroll" direction="left" scrollamount="6" onmouseover="this.stop();" onmouseout="this.start();" data-key="breakingnews">
-    Headlines NOW অল্প কিছু দিনের মধ্যেই লাইভ হবে। অনুগ্রহ করে অপেক্ষা করুন। আপডেট নিউজ ও লাইভ ট্র্যাকিং পেতে আমাদের সাথেই থাকুন।  
-  </marquee>
+<!-- News container -->
+<div id="news-container">
+  <!-- Home page news -->
+  <div id="home-news" class="news-section">
+    <div class="news-title" id="home-news-title"></div>
+    <div class="news-content" id="home-news-content"></div>
+  </div>
+  <!-- Bangladesh category news -->
+  <div id="bangladesh-news" class="news-section" style="display:none;">
+    <div class="news-title" id="bangladesh-news-title"></div>
+    <div class="news-content" id="bangladesh-news-content"></div>
+  </div>
 </div>
 
 <script>
-  // Language data
+  // News data in both languages
   const translations = {
     bn: {
-      bangladesh: "বাংলাদেশ",
-      politics: "রাজনীতি",
-      sports: "খেলাধুলা",
-      international: "আন্তর্জাতিক",
-      media: "মিডিয়া",
-      live: "লাইভ ▼",
-      sharemarket: "শেয়ার মার্কেট লাইভ প্রাইস",
-      crypto: "ক্রিপ্টোকারেন্সি লাইভ প্রাইস",
-      airplane: "লাইভ এয়ারপ্লেন ট্র্যাকিং",
-      weather: "লাইভ ওয়েদার",
-      economy: "অর্থনীতি",
-      health: "স্বাস্থ্য",
-      breakingnews: "Headlines NOW অল্প কিছু দিনের মধ্যেই লাইভ হবে। অনুগ্রহ করে অপেক্ষা করুন। আপডেট নিউজ ও লাইভ ট্র্যাকিং পেতে আমাদের সাথেই থাকুন। 
+      homeNewsTitle: "বাংলা সংবাদ শিরোনাম",
+      homeNewsContent: `বাংলাদেশ-মালয়েশিয়া স্বাক্ষর করল ৫টি সমঝোতা স্মারক, ৩টি নোট বিনিময়
+
+মালয়েশিয়ার প্রশাসনিক রাজধানী পুত্রাজয়ায় ১২ আগস্ট ২০২৫ অনুষ্ঠিত এক উর্ধ্বতন বৈঠকে বাংলাদেশ ও মালয়েশিয়া পাঁচটি সমঝোতা স্মারক (MoU) স্বাক্ষর এবং তিনটি নোট বিনিময় করেছে। উক্ত অনুষ্ঠানে উপস্থিত ছিলেন বাংলাদেশের চিফ অ্যাডভাইজার অধ্যাপক মুহাম্মদ ইউনুস এবং মালয়েশিয়ার প্রধানমন্ত্রী আনোয়ার ইব্রাহিম।
+
+বাংলাদেশ ও মালয়েশিয়ার মধ্যে উচ্চশিক্ষা, কূটনৈতিক প্রশিক্ষণ, প্রতিরক্ষা, তরলীকৃত প্রাকৃতিক গ্যাস (LNG), হালাল ইকোসিস্টেম, কৌশলগত গবেষণা এবং বাণিজ্যিক সম্পর্ক বৃদ্ধির মতো বিভিন্ন ক্ষেত্রে সহযোগিতা জোরদারের লক্ষ্যে এই চুক্তিসমূহ স্বাক্ষরিত হয়।
+
+মালয়েশিয়ার পররাষ্ট্রমন্ত্রী উৎটম হাজী মোহাম্মদ বিন হাজী হাসান ও বাংলাদেশের পররাষ্ট্র উপদেষ্টা মোঃ তৌহিদ হোসেন উচ্চশিক্ষা ও কূটনৈতিক প্রশিক্ষণ নিয়ে তিনটি নোট বিনিময় করেন।
+
+প্রতিরক্ষা ক্ষেত্রে সহযোগিতার MoU স্বাক্ষর করেন মালয়েশিয়ার প্রতিরক্ষা মন্ত্রী মোহাম্মদ খালেদ বিন নরদিন ও বাংলাদেশের পররাষ্ট্র উপদেষ্টা মোঃ তৌহিদ হোসেন।
+
+তরলীকৃত প্রাকৃতিক গ্যাস সরবরাহ ও পেট্রোলিয়াম অবকাঠামোর ওপর MoU-তে স্বাক্ষর করেন মালয়েশিয়ার অর্থমন্ত্রী আমীর হামজা বিন আজিজান ও বাংলাদেশের জ্বালানি উপদেষ্টা এম ফজল কবির খান।
+
+হালাল ইকোসিস্টেম, কৌশলগত গবেষণা প্রতিষ্ঠান ও বাণিজ্যিক চেম্বারগুলোর মধ্যে সহযোগিতার জন্যও আলাদা আলাদা MoU স্বাক্ষরিত হয়েছে।
+
+এই উদ্যোগ দুই দেশের মধ্যে বন্ধুত্বপূর্ণ সম্পর্ক এবং অর্থনৈতিক, নিরাপত্তা ও সাংস্কৃতিক ক্ষেত্রে বহুমুখী সহযোগিতা আরও শক্তিশালী করবে বলে আশা করা হচ্ছে।`,
+
+      bangladeshNewsTitle: "বাংলাদেশ-মালয়েশিয়া সম্পর্কিত সংবাদ",
+      bangladeshNewsContent: `মালয়েশিয়ার প্রশাসনিক রাজধানী পুত্রাজয়ায় ১২ আগস্ট ২০২৫ অনুষ্ঠিত এক উর্ধ্বতন বৈঠকে বাংলাদেশ ও মালয়েশিয়া পাঁচটি সমঝোতা স্মারক (MoU) স্বাক্ষর এবং তিনটি নোট বিনিময় করেছে। উক্ত অনুষ্ঠানে উপস্থিত ছিলেন বাংলাদেশের চিফ অ্যাডভাইজার অধ্যাপক মুহাম্মদ ইউনুস এবং মালয়েশিয়ার প্রধানমন্ত্রী আনোয়ার ইব্রাহিম।
+
+বাংলাদেশ ও মালয়েশিয়ার মধ্যে উচ্চশিক্ষা, কূটনৈতিক প্রশিক্ষণ, প্রতিরক্ষা, তরলীকৃত প্রাকৃতিক গ্যাস (LNG), হালাল ইকোসিস্টেম, কৌশলগত গবেষণা এবং বাণিজ্যিক সম্পর্ক বৃদ্ধির মতো বিভিন্ন ক্ষেত্রে সহযোগিতা জোরদারের লক্ষ্যে এই চুক্তিসমূহ স্বাক্ষরিত হয়।
+
+মালয়েশিয়ার পররাষ্ট্রমন্ত্রী উৎটম হাজী মোহাম্মদ বিন হাজী হাসান ও বাংলাদেশের পররাষ্ট্র উপদেষ্টা মোঃ তৌহিদ হোসেন উচ্চশিক্ষা ও কূটনৈতিক প্রশিক্ষণ নিয়ে তিনটি নোট বিনিময় করেন।
+
+প্রতিরক্ষা ক্ষেত্রে সহযোগিতার MoU স্বাক্ষর করেন মালয়েশিয়ার প্রতিরক্ষা মন্ত্রী মোহাম্মদ খালেদ বিন নরদিন ও বাংলাদেশের পররাষ্ট্র উপদেষ্টা মোঃ তৌহিদ হোসেন।
+
+তরলীকৃত প্রাকৃতিক গ্যাস সরবরাহ ও পেট্রোলিয়াম অবকাঠামোর ওপর MoU-তে স্বাক্ষর করেন মালয়েশিয়ার অর্থমন্ত্রী আমীর হামজা বিন আজিজান ও বাংলাদেশের জ্বালানি উপদেষ্টা এম ফজল কবির খান।
+
+হালাল ইকোসিস্টেম, কৌশলগত গবেষণা প্রতিষ্ঠান ও বাণিজ্যিক চেম্বারগুলোর মধ্যে সহযোগিতার জন্যও আলাদা আলাদা MoU স্বাক্ষরিত হয়েছে।
+
+এই উদ্যোগ দুই দেশের মধ্যে বন্ধুত্বপূর্ণ সম্পর্ক এবং অর্থনৈতিক, নিরাপত্তা ও সাংস্কৃতিক ক্ষেত্রে বহুমুখী সহযোগিতা আরও শক্তিশালী করবে বলে আশা করা হচ্ছে।`
     },
     en: {
-      bangladesh: "Bangladesh",
-      politics: "Politics",
-      sports: "Sports",
-      international: "International",
-      media: "Media",
-      live: "Live ▼",
-      sharemarket: "Share Market Live Price",
-      crypto: "Cryptocurrency Live Price",
-      airplane: "Live Airplane Tracking",
-      weather: "Live Weather",
-      economy: "Economy",
-      health: "Health",
-      breakingnews: "Headlines NOW will be live in a few days. Please stay tuned for updates and live tracking. 
+      homeNewsTitle: "Bangladesh and Malaysia Sign 5 MoUs, Exchange 3 Notes to Strengthen Cooperation",
+      homeNewsContent: `On August 12, 2025, in Putrajaya, the administrative capital of Malaysia, Bangladesh and Malaysia signed five Memorandums of Understanding (MoUs) and exchanged three notes to deepen cooperation between the two nations. The ceremony was witnessed by Bangladesh’s Chief Adviser Prof. Muhammad Yunus and Malaysian Prime Minister Anwar Ibrahim.
+
+The agreements cover various sectors including higher education, diplomatic training, defense, liquefied natural gas (LNG) supply, halal ecosystem, strategic studies, and trade relations.
+
+Malaysian Foreign Minister Utama Haji Mohamad bin Haji Hasan and Bangladesh’s Foreign Affairs Adviser Md. Touhid Hossain exchanged three notes on cooperation in higher education and diplomat training.
+
+The defense cooperation MoU was signed by Malaysian Defence Minister Mohamed Khaled bin Nordin and Bangladesh’s Foreign Affairs Adviser Md. Touhid Hossain.
+
+An MoU on LNG supply and petroleum infrastructure was signed by Malaysian Acting Economic Minister Amir Hamzah bin Azizan and Bangladesh’s Energy Adviser M Fouzul Kabir Khan.
+
+Additional MoUs were signed to boost cooperation between halal ecosystem sectors, strategic research institutes, and chambers of commerce from both countries.
+
+This series of agreements is expected to further strengthen the friendly ties and enhance multifaceted cooperation in economic, security, and cultural fields between Bangladesh and Malaysia.`,
+
+      bangladeshNewsTitle: "Bangladesh-Malaysia Related News",
+      bangladeshNewsContent: `On August 12, 2025, in Putrajaya, the administrative capital of Malaysia, Bangladesh and Malaysia signed five Memorandums of Understanding (MoUs) and exchanged three notes to deepen cooperation between the two nations. The ceremony was witnessed by Bangladesh’s Chief Adviser Prof. Muhammad Yunus and Malaysian Prime Minister Anwar Ibrahim.
+
+The agreements cover various sectors including higher education, diplomatic training, defense, liquefied natural gas (LNG) supply, halal ecosystem, strategic studies, and trade relations.
+
+Malaysian Foreign Minister Utama Haji Mohamad bin Haji Hasan and Bangladesh’s Foreign Affairs Adviser Md. Touhid Hossain exchanged three notes on cooperation in higher education and diplomat training.
+
+The defense cooperation MoU was signed by Malaysian Defence Minister Mohamed Khaled bin Nordin and Bangladesh’s Foreign Affairs Adviser Md. Touhid Hossain.
+
+An MoU on LNG supply and petroleum infrastructure was signed by Malaysian Acting Economic Minister Amir Hamzah bin Azizan and Bangladesh’s Energy Adviser M Fouzul Kabir Khan.
+
+Additional MoUs were signed to boost cooperation between halal ecosystem sectors, strategic research institutes, and chambers of commerce from both countries.
+
+This series of agreements is expected to further strengthen the friendly ties and enhance multifaceted cooperation in economic, security, and cultural fields between Bangladesh and Malaysia.`
     }
   };
 
-  // Update texts according to selected language
+  // Update news content by language
+  function updateNews(lang) {
+    document.getElementById('home-news-title').textContent = translations[lang].homeNewsTitle;
+    document.getElementById('home-news-content').textContent = translations[lang].homeNewsContent;
+
+    document.getElementById('bangladesh-news-title').textContent = translations[lang].bangladeshNewsTitle;
+    document.getElementById('bangladesh-news-content').textContent = translations[lang].bangladeshNewsContent;
+  }
+
+  // Language switcher buttons
+  const bnBtn = document.getElementById('bn-btn');
+  const enBtn = document.getElementById('en-btn');
+
+  // Category buttons
+  const categoryButtons = document.querySelectorAll('#category-buttons button');
+
   function setLanguage(lang) {
-    // Update all elements with data-key attributes
-    document.querySelectorAll('[data-key]').forEach(el => {
-      const key = el.getAttribute('data-key');
-      if(translations[lang][key]) {
-        el.textContent = translations[lang][key];
-      }
-    });
-
-    // Update clock and date locale
-    updateClock(lang);
-
-    // Update language switcher UI
+    updateNews(lang);
     if(lang === 'bn') {
-      document.getElementById('bn-btn').classList.add('selected');
-      document.getElementById('en-btn').classList.remove('selected');
+      bnBtn.classList.add('selected');
+      enBtn.classList.remove('selected');
     } else {
-      document.getElementById('en-btn').classList.add('selected');
-      document.getElementById('bn-btn').classList.remove('selected');
+      enBtn.classList.add('selected');
+      bnBtn.classList.remove('selected');
     }
   }
 
-  // Live clock and date update with locale
+  function showCategory(cat) {
+    if(cat === 'home') {
+      document.getElementById('home-news').style.display = 'block';
+      document.getElementById('bangladesh-news').style.display = 'none';
+    } else if(cat === 'bangladesh') {
+      document.getElementById('home-news').style.display = 'none';
+      document.getElementById('bangladesh-news').style.display = 'block';
+    }
+    categoryButtons.forEach(btn => {
+      btn.classList.remove('selected');
+      if(btn.getAttribute('data-cat') === cat) btn.classList.add('selected');
+    });
+  }
+
+  bnBtn.addEventListener('click', () => setLanguage('bn'));
+  enBtn.addEventListener('click', () => setLanguage('en'));
+
+  categoryButtons.forEach(btn => {
+    btn.addEventListener('click', () => showCategory(btn.getAttribute('data-cat')));
+  });
+
+  // Clock & date
   function updateClock(lang='bn') {
     const now = new Date();
+    const locale = lang === 'bn' ? 'bn-BD' : 'en-US';
+
     const optionsTime = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
     const optionsDate = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' };
 
-    // For Bengali use bn-BD locale, for English use en-US
-    const locale = lang === 'bn' ? 'bn-BD' : 'en-US';
-
-    const timeString = now.toLocaleTimeString(locale, optionsTime);
-    document.getElementById('clock').textContent = timeString;
-
-    const dateString = now.toLocaleDateString(locale, optionsDate);
-    document.getElementById('date').textContent = dateString;
+    document.getElementById('clock').textContent = now.toLocaleTimeString(locale, optionsTime);
+    document.getElementById('date').textContent = now.toLocaleDateString(locale, optionsDate);
   }
 
-  // Event listeners for language buttons
-  document.getElementById('bn-btn').addEventListener('click', () => setLanguage('bn'));
-  document.getElementById('en-btn').addEventListener('click', () => setLanguage('en'));
-
-  // Initialize with Bengali as default
-  setLanguage('bn');
-
-  // Also update time every second
   setInterval(() => {
-    // check selected language
-    const lang = document.getElementById('bn-btn').classList.contains('selected') ? 'bn' : 'en';
+    const lang = bnBtn.classList.contains('selected') ? 'bn' : 'en';
     updateClock(lang);
   }, 1000);
 
+  // Initialize page
+  setLanguage('bn');
+  showCategory('home');
+  updateClock('bn');
 </script>
 
 </body>
 </html>
-
