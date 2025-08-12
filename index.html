@@ -1,177 +1,85 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Headlines NOW</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>News Website</title>
 <style>
   body {
+    font-family: Arial, sans-serif;
     margin: 0;
-    font-family: 'SolaimanLipi', Arial, sans-serif;
-    background: #fff;
-    color: #000;
+    padding: 0;
+    background: #f4f4f4;
   }
-  /* Top Bar Container */
-  .topbar {
-    background: #222;
+  header {
+    background: #d32f2f;
     color: white;
-    padding: 5px 20px;
+    padding: 10px 20px;
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    position: relative;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
   }
-  /* Left side: time and date stacked */
-  .time-date {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 2px;
-    font-size: 14px;
+  .logo {
+    font-size: 24px;
     font-weight: bold;
-    line-height: 1.2;
   }
-  #clock {
-    font-size: 16px;
+  .right-section {
+    text-align: right;
   }
-  #date {
-    font-size: 13px;
-    font-weight: normal;
-  }
-  /* Right side container for language + login/signup */
-  .right-top {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 5px;
-    font-weight: bold;
-    user-select: none;
-  }
-  /* Language Switcher */
-  #lang-switcher {
-    color: white;
+  .lang-switch {
     cursor: pointer;
-    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 5px;
   }
-  #lang-switcher span {
+  .auth-links a {
+    color: white;
+    text-decoration: none;
     margin-left: 10px;
   }
-  #lang-switcher span.selected {
-    text-decoration: underline;
+  nav {
+    background: #b71c1c;
+    padding: 10px;
   }
-  #lang-switcher span:hover {
-    text-decoration: underline;
-  }
-  /* Login/Signup */
-  #auth-links {
-    font-size: 14px;
-  }
-  #auth-links a {
-    color: white;
-    margin-left: 15px;
-    text-decoration: none;
-    font-weight: bold;
-    cursor: pointer;
-  }
-  #auth-links a:hover {
-    text-decoration: underline;
-  }
-  /* Headlines NOW header */
-  .headline-banner {
-    background: #d71920;
-    color: white;
-    font-weight: bold;
-    font-size: 36px;
-    text-align: center;
-    padding: 20px 0;
-    user-select: none;
+  nav ul {
     margin: 0;
-  }
-  /* Navigation Menu for categories */
-  nav.nav-bar {
-    background: #f4f4f4;
-    border-bottom: 1px solid #ddd;
-    display: flex;
-    justify-content: center;
-  }
-  nav.nav-bar ul {
-    list-style: none;
     padding: 0;
-    margin: 0;
+    list-style: none;
     display: flex;
-    flex-wrap: nowrap;
-    gap: 20px;
-    font-weight: bold;
-    font-size: 14px;
+    flex-wrap: wrap;
   }
-  nav.nav-bar ul li a {
+  nav ul li {
+    margin-right: 15px;
+  }
+  nav ul li a {
+    color: white;
     text-decoration: none;
-    color: #222;
-    padding: 12px 10px;
-    display: block;
-    white-space: nowrap;
-    cursor: pointer;
+    font-weight: bold;
   }
-  nav.nav-bar ul li a:hover {
-    color: #d71920;
-  }
-  /* Responsive for small screen */
-  @media (max-width: 768px) {
-    .topbar {
-      flex-wrap: wrap;
-      justify-content: space-between;
-    }
-    .time-date {
-      font-size: 14px;
-      order: 1;
-    }
-    .right-top {
-      order: 2;
-      width: 100%;
-      align-items: center;
-      flex-direction: row;
-      justify-content: flex-end;
-      gap: 15px;
-      margin-top: 5px;
-    }
-    nav.nav-bar ul {
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-      font-size: 13px;
-    }
-    .headline-banner {
-      font-size: 28px;
-      padding: 15px 0;
-    }
+  .content {
+    padding: 20px;
+    background: white;
+    max-width: 900px;
+    margin: 20px auto;
+    border-radius: 8px;
   }
 </style>
 </head>
 <body>
 
-<!-- Top Bar -->
-<div class="topbar">
-  <div class="time-date">
-    <div id="clock">Loading time...</div>
-    <div id="date"></div>
-  </div>
-  <div class="right-top">
-    <div id="lang-switcher">
-      <span id="bn-btn" class="selected">বাংলা</span> / <span id="en-btn">ENGLISH</span>
-    </div>
-    <div id="auth-links">
-      <a href="#">সাইন আপ</a> / <a href="#">লগইন</a>
+<header>
+  <div class="logo" id="headline">Headlines NOW</div>
+  <div class="right-section">
+    <div class="lang-switch" id="langSwitch">বাংলা / ENGLISH</div>
+    <div class="auth-links">
+      <a href="signup.html" id="signupLink">সাইন আপ</a> / 
+      <a href="login.html" id="loginLink">লগইন</a>
     </div>
   </div>
-</div>
+</header>
 
-<!-- Headlines NOW Banner -->
-<h1 class="headline-banner">Headlines NOW</h1>
-
-<!-- Navigation Bar -->
-<nav class="nav-bar">
-  <ul>
+<nav>
+  <ul id="categories">
     <li><a href="#">বাংলাদেশ</a></li>
     <li><a href="#">রাজনীতি</a></li>
     <li><a href="#">অর্থনীতি ও ব্যবসা</a></li>
@@ -187,49 +95,65 @@
   </ul>
 </nav>
 
+<div class="content">
+  <h2 id="newsTitle">বাংলাদেশ-মালয়েশিয়া স্বাক্ষর করল ৫টি সমঝোতা স্মারক, ৩টি নোট বিনিময়</h2>
+  <p id="newsContent">
+    মালয়েশিয়ার প্রশাসনিক রাজধানী পুত্রাজয়ায় ১২ আগস্ট ২০২৫ অনুষ্ঠিত এক উর্ধ্বতন বৈঠকে বাংলাদেশ ও মালয়েশিয়া পাঁচটি সমঝোতা স্মারক (MoU) স্বাক্ষর এবং তিনটি নোট বিনিময় করেছে। উক্ত অনুষ্ঠানে উপস্থিত ছিলেন বাংলাদেশের চিফ অ্যাডভাইজার অধ্যাপক মুহাম্মদ ইউনুস এবং মালয়েশিয়ার প্রধানমন্ত্রী আনোয়ার ইব্রাহিম। 
+    বাংলাদেশ ও মালয়েশিয়ার মধ্যে উচ্চশিক্ষা, কূটনৈতিক প্রশিক্ষণ, প্রতিরক্ষা, LNG, হালাল ইকোসিস্টেম, কৌশলগত গবেষণা এবং বাণিজ্যিক সম্পর্ক বৃদ্ধির মতো বিভিন্ন ক্ষেত্রে সহযোগিতা জোরদারের লক্ষ্যে এই চুক্তিসমূহ স্বাক্ষরিত হয়।
+  </p>
+</div>
+
 <script>
-  // Clock & Date Update (বাংলা ও ইংরেজি জন্য)
-  function updateClock(lang='bn') {
-    const now = new Date();
-    let optionsTime = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
-    let optionsDate = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' };
-
-    // ভাষা অনুযায়ী লোকেল সেটিংস
-    const locale = lang === 'bn' ? 'bn-BD' : 'en-US';
-
-    const timeString = now.toLocaleTimeString(locale, optionsTime);
-    const dateString = now.toLocaleDateString(locale, optionsDate);
-
-    document.getElementById('clock').textContent = timeString;
-    document.getElementById('date').textContent = dateString;
+const translations = {
+  bn: {
+    categories: [
+      "বাংলাদেশ", "রাজনীতি", "অর্থনীতি ও ব্যবসা", "আন্তর্জাতিক সংবাদ",
+      "খেলাধুলা", "প্রযুক্তি", "বিনোদন", "লাইফস্টাইল",
+      "ফিচার ও বিশ্লেষণ", "ভ্রমণ ব্লগ", "লাইভ আপডেট", "সেবা"
+    ],
+    signup: "সাইন আপ",
+    login: "লগইন",
+    newsTitle: "বাংলাদেশ-মালয়েশিয়া স্বাক্ষর করল ৫টি সমঝোতা স্মারক, ৩টি নোট বিনিময়",
+    newsContent: `মালয়েশিয়ার প্রশাসনিক রাজধানী পুত্রাজয়ায় ১২ আগস্ট ২০২৫ অনুষ্ঠিত এক উর্ধ্বতন বৈঠকে বাংলাদেশ ও মালয়েশিয়া পাঁচটি সমঝোতা স্মারক (MoU) স্বাক্ষর এবং তিনটি নোট বিনিময় করেছে। উক্ত অনুষ্ঠানে উপস্থিত ছিলেন বাংলাদেশের চিফ অ্যাডভাইজার অধ্যাপক মুহাম্মদ ইউনুস এবং মালয়েশিয়ার প্রধানমন্ত্রী আনোয়ার ইব্রাহিম। 
+    বাংলাদেশ ও মালয়েশিয়ার মধ্যে উচ্চশিক্ষা, কূটনৈতিক প্রশিক্ষণ, প্রতিরক্ষা, LNG, হালাল ইকোসিস্টেম, কৌশলগত গবেষণা এবং বাণিজ্যিক সম্পর্ক বৃদ্ধির মতো বিভিন্ন ক্ষেত্রে সহযোগিতা জোরদারের লক্ষ্যে এই চুক্তিসমূহ স্বাক্ষরিত হয়।`
+  },
+  en: {
+    categories: [
+      "Bangladesh", "Politics", "Economy & Business", "International News",
+      "Sports", "Technology", "Entertainment", "Lifestyle",
+      "Features & Analysis", "Travel Blog", "Live Updates", "Services"
+    ],
+    signup: "Sign Up",
+    login: "Login",
+    newsTitle: "Bangladesh and Malaysia Sign 5 MoUs, Exchange 3 Notes",
+    newsContent: `On August 12, 2025, in Putrajaya, Malaysia, Bangladesh and Malaysia signed five MoUs and exchanged three notes to strengthen cooperation in various fields including higher education, diplomatic training, defense, LNG, halal ecosystem, strategic research, and trade relations. The event was attended by Bangladesh's Chief Adviser Prof. Muhammad Yunus and Malaysian Prime Minister Anwar Ibrahim.`
   }
+};
 
-  // ভাষা সিলেক্টর লজিক
-  const bnBtn = document.getElementById('bn-btn');
-  const enBtn = document.getElementById('en-btn');
+let currentLang = "bn";
 
-  let currentLang = 'bn';
+document.getElementById("langSwitch").addEventListener("click", () => {
+  currentLang = currentLang === "bn" ? "en" : "bn";
+  updateLanguage();
+});
 
-  function setLanguage(lang) {
-    currentLang = lang;
-    if(lang === 'bn'){
-      bnBtn.classList.add('selected');
-      enBtn.classList.remove('selected');
-      // এখানে চাইলে আপনার বাংলা ভাষার জন্য UI পরিবর্তন কোড আসতে পারে
-    } else {
-      enBtn.classList.add('selected');
-      bnBtn.classList.remove('selected');
-      // ইংরেজি UI পরিবর্তনের জন্য কোড এখানে
-    }
-    updateClock(lang);
-  }
+function updateLanguage() {
+  const langData = translations[currentLang];
+  
+  // Update categories
+  const categoryElements = document.querySelectorAll("#categories li a");
+  langData.categories.forEach((cat, i) => {
+    categoryElements[i].textContent = cat;
+  });
 
-  bnBtn.addEventListener('click', () => setLanguage('bn'));
-  enBtn.addEventListener('click', () => setLanguage('en'));
+  // Update auth links
+  document.getElementById("signupLink").textContent = langData.signup;
+  document.getElementById("loginLink").textContent = langData.login;
 
-  // শুরুতেই বাংলা ভাষা দিয়ে চালু হবে
-  setLanguage('bn');
-  setInterval(() => updateClock(currentLang), 1000);
+  // Update news content
+  document.getElementById("newsTitle").textContent = langData.newsTitle;
+  document.getElementById("newsContent").textContent = langData.newsContent;
+}
 </script>
 
 </body>
